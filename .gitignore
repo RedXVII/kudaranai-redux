@@ -30,7 +30,10 @@ bower_components
 .lock-wscript
 
 # Compiled binary addons (https://nodejs.org/api/addons.html)
+build/
 build/Release
+
+public/FGOCG集_製品版
 
 # Dependency directories
 node_modules/
@@ -59,3 +62,5 @@ typings/
 
 # next.js build output
 .next
+
+bundle.js

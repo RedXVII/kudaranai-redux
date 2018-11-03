@@ -1,0 +1,33 @@
+{
+  "name": "kudaranai-redux",
+  "version": "1.0.0",
+  "description": "",
+  "keywords": [],
+  "main": "src/index.js",
+  "dependencies": {
+    "classnames": "2.2.6",
+    "envify": "^4.1.0",
+    "lodash": "^4.17.11",
+    "react": "16.4.2",
+    "react-dom": "16.4.2",
+    "react-redux": "5.0.7",
+    "react-scripts": "1.1.4",
+    "redux": "4.0.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.1.2",
+    "@babel/plugin-proposal-class-properties": "^7.1.0",
+    "@babel/preset-env": "^7.1.0",
+    "@babel/preset-react": "^7.0.0",
+    "babel-plugin-lodash": "^3.3.4",
+    "babelify": "^10.0.0",
+    "browserify-css": "^0.14.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "prod": "browserify src/index.js -t babelify -t [envify --NODE_ENV production] -t browserify-css  --outfile bundle.js"
+  }
+}
