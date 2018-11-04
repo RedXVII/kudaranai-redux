@@ -1,4 +1,4 @@
-import {TOGGLE_DISPLAY, NEXT_BENJO, DISPLAY_CATALOG, ROLL} from "./actionTypes";
+import {TOGGLE_DISPLAY, SHOW_BENJO, NEXT_BENJO, SET_CATALOG, ROLL} from "./actionTypes";
 
 
 
@@ -7,14 +7,19 @@ export const toggleDisplay = property => ({
   payload: { property }
 });
 
+export const showBenjo = (benjo) => ({
+  type: SHOW_BENJO,
+  payload: {benjo}
+})
+
 export const nextBenjo = () => ({
   type: NEXT_BENJO,
   payload: {}
 })
 
-export const displayCatalog = () => ({
-  type: DISPLAY_CATALOG,
-  payload: {}
+export const setCatalog = (isVisible) => ({
+  type: SET_CATALOG,
+  payload: {isVisible}
 })
 
 export const roll = () => ({

@@ -1,4 +1,4 @@
-import {NEXT_BENJO, DISPLAY_CATALOG, ROLL} from "../actionTypes"
+import {SHOW_BENJO, NEXT_BENJO, SET_CATALOG, ROLL} from "../actionTypes"
 import BenjoList from "../../BenjoList"
 var _ = require('lodash');
 
@@ -73,11 +73,16 @@ export default function (state = initialState, action) {
           summonedBenjos: newSummonedBenjos
         };
       }
-    case DISPLAY_CATALOG:
+    case SHOW_BENJO: {
+      var {benjo} = action.payload;
       return {...state,
-        catalog: true,
-        displayedBenjo: null,
-        summonedBenjos: null
+        displayedBenjo: benjo
+      };
+    }
+    case SET_CATALOG:
+      var {isVisible} = action.payload;
+      return {...state,
+        catalog: isVisible
       };
     case ROLL:
       var summonedBenjos = roll("10ROLLRARITY");

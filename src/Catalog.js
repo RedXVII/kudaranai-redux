@@ -1,57 +1,37 @@
-var React = require('react');
-var BenjoCardMapping = require("./BenjoCardMapping");
-var BenjoHandler = require("./BenjoHandler");
-var _ = require('lodash');
+import React from 'react';
+import { connect } from "react-redux";
+import { showBenjo, setCatalog } from "./redux/actions";
+import BenjoList from "./BenjoList"
+import BenjoCardMapping from "./BenjoCardMapping";
+import _ from 'lodash';
 
-const rootFolder = process.env.NODE_ENV == "development"  ? process.env.PUBLIC_URL + "/FGOCG集_製品版/" : ""
+const rootFolder = process.env.NODE_ENV === "development"  ? process.env.PUBLIC_URL + "/FGOCG集_製品版/" : ""
 
-class Catalog extends React.Component {
+const getPath = (benjoName) =>
+{
+  var path = _.find(BenjoCardMapping, {name: benjoName}).path;
+  return rootFolder + path;
+};
 
-  constructor(props) {
-    super(props);
 
-    this.state = {
-      displayed: null
-    };
-
-    this.back = this.back.bind(this);
-  }
-
-  getPath(benjoName)
-  {
-    var path = _.find(BenjoCardMapping, {name: benjoName}).path;
-    return rootFolder + path;
-  }
-
-  show(benjo)
-  {
-    this.setState({displayed: benjo});
-  }
-
-  back()
-  {
-    this.setState({displayed: null});
-  }
-
-  render()
-  {
-    if (this.state.displayed != null)
-    {
-      return <BenjoHandler name={this.state.displayed.name} special={this.state.displayed.special} nextHandler={this.back} />
-    }
-    return (
-      <div className="catalog">
-        {this.props.benjoList.map((benjo, i) => {
-            return (
-              <a className="benjo_link" key={i} href="#" onClick={() => this.show(benjo)} >
-                <img className="benjo_card" src={this.getPath(benjo.name)}/>
-              </a>
-            )
-            ;})}
-
-      </div>
-    );
-  }
+const Catalog = ({showBenjo, setCatalog}) =>
+{
+  return (
+    <div className="catalog">
+      {BenjoList.map((benjo, i) => {
+          return (
+            <a className="benjo_link" key={i} href="#" onClick={() => showBenjo(benjo)} >
+              <img className="benjo_card" src={getPath(benjo.name)}/>
+            </a>
+          )
+          ;})}
+      <a href="#" className="button blueButton" onClick={() => setCatalog(false)}>タイトルを戻る</a>
+    </div>
+  );
 }
 
-module.exports = Catalog
+
+export default connect(
+  null,
+  {showBenjo, setCatalog}
+)(Catalog);
