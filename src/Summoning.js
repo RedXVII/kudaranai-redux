@@ -54,7 +54,7 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-var connectResult = connect(mapStateToProps,mapDispatchToProps)(Summoning);
+var connectResult = connect(mapStateToProps, {nextBenjo, displayCatalog, roll} )(Summoning);
 console.log(connectResult);
 
 

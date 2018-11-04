@@ -81,10 +81,11 @@ export default function (state = initialState, action) {
       };
     case ROLL:
       var summonedBenjos = roll("10ROLLRARITY");
+      var displayedBenjo = summonedBenjos.shift()
       return {...state,
         catalog:false,
         summonedBenjos: summonedBenjos,
-        displayedBenjo: summonedBenjos[0]
+        displayedBenjo: displayedBenjo
       };
 
     default:
