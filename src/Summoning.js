@@ -1,19 +1,16 @@
-import React from 'react';
-import { connect } from "react-redux";
-import { nextBenjo, setCatalog, roll } from "./redux/actions";
-import "./styles.css";
+import React from 'react'
+import { connect } from "react-redux"
+import { nextBenjo, setCatalog, roll } from "./redux/actions"
 import Catalog from "./Catalog"
-var BenjoHandler = require("./BenjoHandler");
+import BenjoHandler from "./BenjoHandler"
+import "./styles.css"
 
-
-
-
-const Summoning = ({mode, nextBenjo, setCatalog, roll} ) =>
+const Summoning = ({mode, display, nextBenjo, setCatalog, roll} ) =>
 {
 
   if (mode.displayedBenjo != null)
   {
-    return <BenjoHandler name={mode.displayedBenjo.name} special={mode.displayedBenjo.special} nextHandler={nextBenjo} />
+    return ( <BenjoHandler benjo={mode.displayedBenjo} display={display} /> )
   }
   else if (mode.catalog)
   {
@@ -23,7 +20,7 @@ const Summoning = ({mode, nextBenjo, setCatalog, roll} ) =>
     return (
       <div className="summon_container">
         <div className="summon_system" >
-          {process.env.NODE_ENV == "development" ?
+          {process.env.NODE_ENV === "development" ?
           (<img id="title_screen" src={process.env.PUBLIC_URL + "/FGOCG集_製品版/04ビューワ用/ピックアップタイトル.jpg"}/>) :
           (<img id="title_screen" src="04ビューワ用/ピックアップタイトル.jpg"/>)}
           <div className="title_buttons">
@@ -37,7 +34,7 @@ const Summoning = ({mode, nextBenjo, setCatalog, roll} ) =>
 }
 
 const mapStateToProps = state => {
-  return { mode: state.mode };
+  return { mode: state.mode, display: state.display};
 };
 
 export default connect(

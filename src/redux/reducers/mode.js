@@ -1,6 +1,6 @@
 import {SHOW_BENJO, NEXT_BENJO, SET_CATALOG, ROLL} from "../actionTypes"
 import BenjoList from "../../BenjoList"
-var _ = require('lodash');
+import _ from 'lodash'
 
 const initialState = {
   displayedBenjo: null,
@@ -16,15 +16,15 @@ function shuffledList()
 function roll(mode)
 {
   var summonedBenjos;
-  if (mode == "EVERYONE")
+  if (mode === "EVERYONE")
   {
     summonedBenjos =this.shuffledList();
   }
-  else if (mode == "10ROLL")
+  else if (mode === "10ROLL")
   {
     summonedBenjos = this.shuffledList().slice(0,10);
   }
-  else if (mode == "10ROLLRARITY")
+  else if (mode === "10ROLLRARITY")
   {
     var i;
     summonedBenjos = [];
@@ -34,16 +34,16 @@ function roll(mode)
       var rng = _.random(100);
       var found;
       if (rng > 80){ //SSR
-        found = _.find(shuffledList(), function(b) { return b.rarity == 5;});
+        found = _.find(shuffledList(), function(b) { return b.rarity === 5;});
       }
       else if (rng > 50){ //SR
-        found = _.find(shuffledList(), function(b) { return b.rarity == 4;});
+        found = _.find(shuffledList(), function(b) { return b.rarity === 4;});
       }
       else{ // R
-        found = _.find(shuffledList(), function(b) { return b.rarity == 3;});
+        found = _.find(shuffledList(), function(b) { return b.rarity === 3;});
       }
 
-      if (found == previous) {
+      if (found === previous) {
         i--;
       }
       else {
@@ -57,9 +57,10 @@ function roll(mode)
 }
 
 export default function (state = initialState, action) {
+  console.log("NEW ACTION :" + action.type);
   switch (action.type) {
     case NEXT_BENJO:
-      if (state.catalog == true) {
+      if (state.catalog === true) {
         return {...state,
           displayedBenjo: null
         };
@@ -76,7 +77,7 @@ export default function (state = initialState, action) {
     case SHOW_BENJO: {
       var {benjo} = action.payload;
       return {...state,
-        displayedBenjo: benjo
+        displayedBenjo: Object.assign({}, benjo)
       };
     }
     case SET_CATALOG:

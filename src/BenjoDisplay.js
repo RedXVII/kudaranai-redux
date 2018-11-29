@@ -1,7 +1,7 @@
-var React = require('react');
-var _ = require('lodash');
+import React from 'react'
+import _ from 'lodash'
 
-var BenjoMapping = require('./BenjoMapping');
+import BenjoMapping from './BenjoMapping'
 
 const rootFolder = process.env.NODE_ENV == "development"  ? process.env.PUBLIC_URL + "/FGOCG集_製品版/" : ""
 
@@ -12,30 +12,26 @@ function optionsToNumber(options)
   return b;
 }
 
-class BenjoDisplay extends React.Component {
-  build_url() {
-    var url = rootFolder;
 
-    var myOptions = _.clone(this.props);
 
-    if (!this.props.special_allowed)
-    {
-      myOptions.special = false;
-    }
+const BenjoDisplay = (props) => {
+  var url = rootFolder;
 
-    var numberKey = optionsToNumber(myOptions);
+  var myOptions = _.clone(props);
 
-    var pathMap = _.find(BenjoMapping, {name: myOptions.name}).pathMap;
-    var path = _.find(pathMap, {bitmap: numberKey}).path;
-
-    return url + path;
+  if (!props.special_allowed)
+  {
+    myOptions.special = false;
   }
 
-  render() {
-    return (
-      <img id="benjo" src={this.build_url()} />
-    );
-  }
+  var numberKey = optionsToNumber(myOptions);
+
+  var pathMap = _.find(BenjoMapping, {name: myOptions.name}).pathMap;
+  var path = _.find(pathMap, {bitmap: numberKey}).path;
+
+  return (
+    <img id="benjo" src={url + path} />
+  );
 }
 
-module.exports = BenjoDisplay;
+export default BenjoDisplay;
