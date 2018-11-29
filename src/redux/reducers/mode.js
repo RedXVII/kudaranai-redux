@@ -57,7 +57,6 @@ function roll(mode)
 }
 
 export default function (state = initialState, action) {
-  console.log("NEW ACTION :" + action.type);
   switch (action.type) {
     case NEXT_BENJO:
       if (state.catalog === true) {

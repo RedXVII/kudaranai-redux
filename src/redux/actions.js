@@ -1,6 +1,15 @@
-import {TOGGLE_DISPLAY, SHOW_BENJO, NEXT_BENJO, SET_CATALOG, ROLL} from "./actionTypes";
+import {TOGGLE_DISPLAY, SHOW_BENJO, NEXT_BENJO, SET_CATALOG,
+  ROLL, FLASH_SCREEN, ANIMATION_ACK} from "./actionTypes";
 
+export const flashScreen = () => ({
+    type: FLASH_SCREEN,
+    payload: { }
+  });
 
+export const animationAck = () => ({
+  type: ANIMATION_ACK,
+  payload: { }
+});
 
 export const toggleDisplay = property => ({
   type: TOGGLE_DISPLAY,

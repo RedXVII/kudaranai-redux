@@ -1,23 +1,24 @@
 import React from 'react'
 import { connect } from "react-redux"
 import { nextBenjo, setCatalog, roll } from "./redux/actions"
+import AnimationComponent from "./AnimationComponent";
 import Catalog from "./Catalog"
 import BenjoHandler from "./BenjoHandler"
 import "./styles.css"
 
 const Summoning = ({mode, display, nextBenjo, setCatalog, roll} ) =>
 {
-
+  var main;
   if (mode.displayedBenjo != null)
   {
-    return ( <BenjoHandler benjo={mode.displayedBenjo} display={display} /> )
+    main = ( <BenjoHandler benjo={mode.displayedBenjo} display={display} /> )
   }
   else if (mode.catalog)
   {
-    return ( <Catalog />)
+    main = ( <Catalog />)
   }
   else {
-    return (
+    main = (
       <div className="summon_container">
         <div className="summon_system" >
           {process.env.NODE_ENV === "development" ?
@@ -31,6 +32,12 @@ const Summoning = ({mode, display, nextBenjo, setCatalog, roll} ) =>
       </div>
     );
   }
+  return (
+    <div>
+      <AnimationComponent/>
+      {main}
+    </div>
+  )
 }
 
 const mapStateToProps = state => {

@@ -12,7 +12,6 @@ const initialState = {
 
 export default function (state = initialState, action) {
 
-  console.log("NEW ACTION :" + action.type);
   switch (action.type) {
     case TOGGLE_DISPLAY:
       const {property} = action.payload;
