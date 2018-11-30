@@ -52,6 +52,8 @@ body {
 
 .benjo_link {
   margin: -2px auto;
+  border: 0;
+  padding: 0;
 }
 
 .benjo_card {
@@ -82,15 +84,16 @@ body {
 }
 
 .button {
-    padding: 0.8em 0.5em;
-    font-size: 0.6em;
-    width: 5.5em;
-    -moz-border-radius:6px;
-    -webkit-border-radius:6px;
-    border-radius:6px;
-    margin: 2px;
-    display:inline-block;
-    text-align: center;
+  box-sizing: content-box;
+  padding: 0.8em 0.5em;
+  font-size: 0.6em;
+  width: 5.5em;
+  -moz-border-radius:6px;
+  -webkit-border-radius:6px;
+  border-radius:6px;
+  margin: 2px;
+  display:inline-block;
+  text-align: center;
 }
 
 

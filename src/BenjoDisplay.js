@@ -3,12 +3,12 @@ import _ from 'lodash'
 
 import BenjoMapping from './BenjoMapping'
 
-const rootFolder = process.env.NODE_ENV == "development"  ? process.env.PUBLIC_URL + "/FGOCG集_製品版/" : ""
+const rootFolder = process.env.NODE_ENV === "development"  ? process.env.PUBLIC_URL + "/FGOCG集_製品版/" : ""
 
 function optionsToNumber(options)
 {
   var a = [options.special, options.contracted, options.hair, options.tan, options.rakugaki, options.clothes, options.text];
-  var b = a.reduce((res, x) => res << 1 | x);
+  var b = a.reduce((res, x) => (res << 1) | x);
   return b;
 }
 
@@ -30,7 +30,7 @@ const BenjoDisplay = (props) => {
   var path = _.find(pathMap, {bitmap: numberKey}).path;
 
   return (
-    <img id="benjo" src={url + path} />
+    <img id="benjo" src={url + path} alt={myOptions.name}/>
   );
 }
 

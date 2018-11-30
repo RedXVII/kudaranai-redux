@@ -7,7 +7,7 @@ const initialState = {
 export default function (state = initialState, action) {
   switch (action.type) {
     case FLASH_SCREEN:
-      return {... state,
+      return {...state,
         shouldFlash: true
       };
     case ANIMATION_ACK:

@@ -18,15 +18,14 @@ const Summoning = ({mode, display, nextBenjo, setCatalog, roll} ) =>
     main = ( <Catalog />)
   }
   else {
+    var url = process.env.NODE_ENV === "development" ? process.env.PUBLIC_URL + "/FGOCG集_製品版/04ビューワ用/ピックアップタイトル.jpg" : "04ビューワ用/ピックアップタイトル.jpg";
     main = (
       <div className="summon_container">
         <div className="summon_system" >
-          {process.env.NODE_ENV === "development" ?
-          (<img id="title_screen" src={process.env.PUBLIC_URL + "/FGOCG集_製品版/04ビューワ用/ピックアップタイトル.jpg"}/>) :
-          (<img id="title_screen" src="04ビューワ用/ピックアップタイトル.jpg"/>)}
+          <img id="title_screen" src={url} alt="pickup" />
           <div className="title_buttons">
-            <a href="#" className="button blueButton" onClick={() => setCatalog(true)}>便女図鑑</a>
-            <a href="#" className="button blueButton" onClick={() => roll()}>{"10回召喚"}</a>
+            <button className="button blueButton" onClick={() => setCatalog(true)}>便女図鑑</button>
+            <button className="button blueButton" onClick={() => roll()}>{"10回召喚"}</button>
           </div>
         </div>
       </div>
