@@ -26,7 +26,10 @@ const BenjoHandler = ({benjo, display, toggleDisplay, nextBenjo, flashScreen}) =
         <button className="button pinkButton" onClick={() => toggleDisplay("special")}
           style={{visibility: benjo.special ? "visible" : "hidden" }} >{display.special ? "裸にして"  : "便女霊衣を着て"}</button>
       </div>
-      <BenjoDisplay {...display} name={benjo.name} special_allowed={benjo.special}/>
+      <button id="benjo" className="benjo_link" onClick={() => display.contracted ? nextBenjo() : flashScreen()} >
+        <BenjoDisplay {...display} name={benjo.name} special_allowed={benjo.special}/>
+      </button>
+      
     </div>
   );
 }

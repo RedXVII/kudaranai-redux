@@ -57,6 +57,10 @@ body {
   cursor: pointer;
 }
 
+.catalog .benjo_link {
+  margin: -2px auto;
+}
+
 .benjo_card {
   width:100%;
 }
@@ -80,6 +84,9 @@ body {
 
 #benjo {
   grid-area: main;
+}
+
+#benjo img {
   max-height:100vh;
   max-width: 100%;
 }

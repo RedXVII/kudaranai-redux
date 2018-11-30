@@ -1,7 +1,6 @@
 import React from 'react'
-import delay from 'delay'
 import { Keyframes } from 'react-spring'
-import { connect, config } from "react-redux"
+import { connect } from "react-redux"
 import { animationAck, setDisplay } from "./redux/actions"
 
 class AnimationComponent extends React.Component {
@@ -13,18 +12,23 @@ class AnimationComponent extends React.Component {
 
   render() {
     const Container = Keyframes.Spring({
-      // Single props
       hide: { opacity: 0, display:"none" },
       
       showAndHide: async (next, cancel, ownProps) => {
-        console.log(ownProps);
-        await next({ opacity: 1, from: { opacity: 0.50 }})
-        await next({ opacity: 0 })
-        await next({ opacity: 1 })
+        let normal = { tension: 170, friction: 20, clamp:true };
+        let fast = { tension: 200, friction: 10, clamp:true };
+        let slow = { tension: 350, friction: 60, clamp:true };
+
+        await next({ opacity: 0.5 , config: normal})
+        await next({ opacity: 1, config: normal})
+        await next({ opacity: 0.2 , config: normal})
+        await next({ opacity: 1, config: normal})
+        await next({ opacity: 0.5 , config: fast})
+        await next({ opacity: 1, config: fast})
+        await next({ opacity: 0.2 , config: normal})
+        await next({ opacity: 1, config: slow})
         this.props.setDisplay("contracted", true);
-        await next({ opacity: 0 })
-        await next({ opacity: 1 })
-        await next({ opacity: 0 })
+        await next({ opacity: 0 , config: slow})
         this.props.animationAck();
       }
       
