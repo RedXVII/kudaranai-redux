@@ -1,7 +1,8 @@
 import React from 'react'
 import delay from 'delay'
-import { connect } from "react-redux"
-import { animationAck } from "./redux/actions"
+import { Keyframes } from 'react-spring'
+import { connect, config } from "react-redux"
+import { animationAck, setDisplay } from "./redux/actions"
 
 class AnimationComponent extends React.Component {
 
@@ -11,28 +12,30 @@ class AnimationComponent extends React.Component {
   }
 
   render() {
-    var flashing  = {}
-    if (this.state.isBusy) {
-      flashing = {opacity: 0.5, display: "block"};
-    }
+    const Container = Keyframes.Spring({
+      // Single props
+      hide: { opacity: 0, display:"none" },
+      
+      showAndHide: async (next, cancel, ownProps) => {
+        console.log(ownProps);
+        await next({ opacity: 1, from: { opacity: 0.50 }})
+        await next({ opacity: 0 })
+        await next({ opacity: 1 })
+        this.props.setDisplay("contracted", true);
+        await next({ opacity: 0 })
+        await next({ opacity: 1 })
+        await next({ opacity: 0 })
+        this.props.animationAck();
+      }
+      
+    });
 
-    return <div className="flash_div" style={flashing}/>
-  }
-
-  async flash()
-  {
-    this.setState({isBusy: true})
-    await delay(1000)
-    this.setState({isBusy: false})
-  }
-
-  componentDidUpdate(prevProps) {
-    if (!prevProps.shouldFlash && this.props.shouldFlash && !this.state.isBusy)
-    {
-      this.props.animationAck();
-      this.flash();
-
-    }
+    let state = this.props.shouldFlash ? "showAndHide" : "hide"
+    return (
+      <Container state={state}>
+          {styles => <div className="flash_div" style={styles}/>}
+      </Container>
+    )
   }
 
 }
@@ -41,4 +44,4 @@ const mapStateToProps = state => {
   return { shouldFlash: state.animation.shouldFlash };
 };
 
-export default connect(mapStateToProps, {animationAck})(AnimationComponent);
+export default connect(mapStateToProps, {animationAck, setDisplay})(AnimationComponent);

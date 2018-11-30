@@ -15,19 +15,28 @@ function optionsToNumber(options)
 
 
 const BenjoDisplay = (props) => {
-  var url = rootFolder;
+  let url = rootFolder;
 
-  var myOptions = _.clone(props);
+  let myOptions = _.clone(props);
 
   if (!props.special_allowed)
   {
     myOptions.special = false;
   }
 
-  var numberKey = optionsToNumber(myOptions);
+  let pathMap = _.find(BenjoMapping, {name: myOptions.name}).pathMap;
+  let numberKey = optionsToNumber(myOptions);
+  let path = _.find(pathMap, {bitmap: numberKey}).path;
 
-  var pathMap = _.find(BenjoMapping, {name: myOptions.name}).pathMap;
-  var path = _.find(pathMap, {bitmap: numberKey}).path;
+  if (!myOptions.contracted)
+  {
+    myOptions.contracted = true;
+    numberKey = optionsToNumber(myOptions);
+    let contractedPath = _.find(pathMap, {bitmap: numberKey}).path;
+    let preloadImg = new Image();
+    preloadImg.src = url + contractedPath;
+
+  }
 
   return (
     <img id="benjo" src={url + path} alt={myOptions.name}/>

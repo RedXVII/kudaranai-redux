@@ -1,5 +1,5 @@
 import {TOGGLE_DISPLAY, SHOW_BENJO, NEXT_BENJO, SET_CATALOG,
-  ROLL, FLASH_SCREEN, ANIMATION_ACK} from "./actionTypes";
+  ROLL, FLASH_SCREEN, ANIMATION_ACK, SET_DISPLAY} from "./actionTypes";
 
 export const flashScreen = () => ({
     type: FLASH_SCREEN,
@@ -14,6 +14,11 @@ export const animationAck = () => ({
 export const toggleDisplay = property => ({
   type: TOGGLE_DISPLAY,
   payload: { property }
+});
+
+export const setDisplay = (property, value) => ({
+  type: SET_DISPLAY,
+  payload: { property, value }
 });
 
 export const showBenjo = (benjo) => ({

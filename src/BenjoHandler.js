@@ -5,12 +5,14 @@ import {toggleDisplay, nextBenjo, flashScreen} from "./redux/actions"
 
 const BenjoHandler = ({benjo, display, toggleDisplay, nextBenjo, flashScreen}) =>
 {
-  var contract = () => {
-    toggleDisplay("contracted");
+  let contract = () => {
     if (!display.contracted) {
       flashScreen();
+    } else {
+      toggleDisplay("contracted");
     }
   };
+
   return(
     <div className="benjo_handler" >
       <div className="sideBar">
