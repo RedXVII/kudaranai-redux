@@ -33,13 +33,13 @@ const BenjoDisplay = (props) => {
     myOptions.contracted = true;
     numberKey = optionsToNumber(myOptions);
     let contractedPath = _.find(pathMap, {bitmap: numberKey}).path;
-    let preloadImg = new Image();
+    const preloadImg = new Image();
     preloadImg.src = url + contractedPath;
 
   }
 
   return (
-    <img id="benjo" src={url + path} alt={myOptions.name}/>
+    <img src={url + path} alt={myOptions.name}/>
   );
 }
 

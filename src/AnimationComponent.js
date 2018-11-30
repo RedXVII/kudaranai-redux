@@ -37,7 +37,7 @@ class AnimationComponent extends React.Component {
     let state = this.props.shouldFlash ? "showAndHide" : "hide"
     return (
       <Container state={state}>
-          {styles => <div className="flash_div" style={styles}/>}
+          {styles => <div onClick={() => {this.props.setDisplay("contracted", true);this.props.animationAck()}} className="flash_div" style={styles}/>}
       </Container>
     )
   }
