@@ -1,11 +1,21 @@
 import React from 'react'
 import { connect } from "react-redux"
+import { Keyframes,animated } from 'react-spring'
 import BenjoDisplay from "./BenjoDisplay"
 import {toggleDisplay, nextBenjo, flashScreen} from "./redux/actions"
 
 const BenjoHandler = ({benjo, display, toggleDisplay, nextBenjo, flashScreen}) =>
 {
-  let contract = () => {
+
+  const Container = Keyframes.Spring({
+    default: {opacity: 1},
+    spinning: async (next, cancel, ownProps) => {
+      let slowDown = { tension: 120, friction: 80, precision: 0.005};
+      await next({ transform: "perspective(1500px) rotateY(1800deg)", from: {transform: "perspective(1500px) rotateY(0deg)"}, config: slowDown });
+    }
+  });
+
+  const contract = () => {
     if (!display.contracted) {
       flashScreen();
     } else {
@@ -26,9 +36,15 @@ const BenjoHandler = ({benjo, display, toggleDisplay, nextBenjo, flashScreen}) =
         <button className="button pinkButton" onClick={() => toggleDisplay("special")}
           style={{visibility: benjo.special ? "visible" : "hidden" }} >{display.special ? "裸にして"  : "便女霊衣を着て"}</button>
       </div>
-      <button id="benjo" className="benjo_link" onClick={() => display.contracted ? nextBenjo() : flashScreen()} >
-        <BenjoDisplay {...display} name={benjo.name} special_allowed={benjo.special}/>
-      </button>
+
+      <Container native state="spinning">
+        {styles => <animated.div id="benjo" style={styles}> 
+          <button  className="benjo_link" onClick={() => display.contracted ? nextBenjo() : flashScreen()} >
+              <BenjoDisplay {...display} name={benjo.name} special_allowed={benjo.special}/>
+            </button>
+        </animated.div>}
+      </Container>
+      
       
     </div>
   );

@@ -1,14 +1,9 @@
 import React from 'react'
-import { Keyframes } from 'react-spring'
+import { Keyframes, animated } from 'react-spring'
 import { connect } from "react-redux"
 import { animationAck, setDisplay } from "./redux/actions"
 
 class AnimationComponent extends React.Component {
-
-  constructor(props) {
-    super(props);
-    this.state = { isBusy: false };
-  }
 
   render() {
     const Container = Keyframes.Spring({
@@ -36,8 +31,8 @@ class AnimationComponent extends React.Component {
 
     let state = this.props.shouldFlash ? "showAndHide" : "hide"
     return (
-      <Container state={state}>
-          {styles => <div onClick={() => {this.props.setDisplay("contracted", true);this.props.animationAck()}} className="flash_div" style={styles}/>}
+      <Container native state={state}>
+          {styles => <animated.div onClick={() => {this.props.setDisplay("contracted", true);this.props.animationAck()}} className="flash_div" style={styles}/>}
       </Container>
     )
   }
