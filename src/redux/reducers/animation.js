@@ -1,17 +1,17 @@
 import {FLASH_SCREEN, ANIMATION_ACK} from "../actionTypes"
 
 const initialState = {
-  shouldFlash: false,
+  contractFlash: false,
 };
 
 export default function (state = initialState, action) {
   switch (action.type) {
     case FLASH_SCREEN:
       return {...state,
-        shouldFlash: true
+        contractFlash: true
       };
     case ANIMATION_ACK:
-      return initialState;
+      return  {...initialState};
     default:
       return state;
   }

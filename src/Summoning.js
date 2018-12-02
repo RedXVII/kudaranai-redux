@@ -11,7 +11,7 @@ const Summoning = ({mode, display, nextBenjo, setCatalog, roll} ) =>
   var main;
   if (mode.displayedBenjo != null)
   {
-    main = ( <BenjoHandler benjo={mode.displayedBenjo} display={display} /> )
+    main = ( <BenjoHandler mode={mode} display={display} /> )
   }
   else if (mode.catalog)
   {

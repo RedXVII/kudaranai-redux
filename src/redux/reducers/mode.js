@@ -1,11 +1,12 @@
-import {SHOW_BENJO, NEXT_BENJO, SET_CATALOG, ROLL} from "../actionTypes"
+import {SHOW_BENJO, NEXT_BENJO, SET_CATALOG, ROLL, ANIMATION_ACK} from "../actionTypes"
 import BenjoList from "../../BenjoList"
 import _ from 'lodash'
 
 const initialState = {
   displayedBenjo: null,
   summonedBenjos: null,
-  catalog: false
+  catalog: false,
+  isSpinning: false
 };
 
 function shuffledList()
@@ -70,7 +71,8 @@ export default function (state = initialState, action) {
         var nextBenjo = newSummonedBenjos.shift() || null;
         return {...state,
           displayedBenjo: nextBenjo,
-          summonedBenjos: newSummonedBenjos
+          summonedBenjos: newSummonedBenjos,
+          isSpinning: true
         };
       }
     case SHOW_BENJO: {
@@ -90,9 +92,16 @@ export default function (state = initialState, action) {
       return {...state,
         catalog:false,
         summonedBenjos: summonedBenjos,
-        displayedBenjo: displayedBenjo
+        displayedBenjo: displayedBenjo,
+        isSpinning: true
       };
-
+    case ANIMATION_ACK:
+      if (state.isSpinning) {
+        return {...state,
+          isSpinning:false
+        }
+      }
+      return state;
     default:
       return state;
   }
